@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "Golos Text";
+  src: url("../assets/fonts/GolosText-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400 700; /* Переменный диапазон веса */
+  font-style: normal;
+}
+@font-face {
+    font-family: "Dela Gothic One";
+    src: url("../assets/fonts/DelaGothicOne-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+*{
+  .hero {
+    color: rebeccapurple;
+
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 400;
+    font-size: calc(42px + (72 - 42) * ((100vw - 390px) / (1440 - 390)));
+    line-height: calc(47px + (72 - 47) * ((100vw - 390px) / (1440 - 390)));
+    letter-spacing: -0.02em;
+
+  }
+.title{
+  //  todo  clear
+  display: flex;
+  flex-direction: column;
+}
+  .heading-h1 {
+    color: rebeccapurple;
+
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 400;
+    font-size: calc(28px + (36 - 28) * ((100vw - 390px) / (1440 - 390)));
+    line-height: calc(41px + (52 - 41) * ((100vw - 390px) / (1440 - 390)));
+    letter-spacing: -0.02em;
+  }
+
+  .text-semibold-28{
+    color: rebeccapurple;
+
+    font-family: "Golos Text", sans-serif;
+    font-weight: 700;
+    font-size: calc(22px + (28 - 22) * ((100vw - 390px) / (1440 - 390)));
+    line-height: calc(26px + (34 - 26) * ((100vw - 390px) / (1440 - 390)));
+    letter-spacing: -0.01em;
+  }
+  .text-regular-28{
+    color: rebeccapurple;
+
+    font-family: "Golos Text", sans-serif;
+    font-weight: 400;
+    font-size: calc(22px + (28 - 22) * ((100vw - 390px) / (1440 - 390)));
+    line-height: calc(26px + (34 - 26) * ((100vw - 390px) / (1440 - 390)));
+    letter-spacing: -0.01em;
+  }
+  .subtitle-medium{
+    color: rebeccapurple;
+
+
+    font-family: "Golos Text", sans-serif;
+    font-weight: 500;
+    font-size: calc(18px + (22 - 18) * ((100vw - 390px) / (1440 - 390)));
+    line-height: calc(22px + (26 - 22) * ((100vw - 390px) / (1440 - 390)));
+    letter-spacing: 0;
+  }
+  .text-medium-16{
+    color: rebeccapurple;
+
+    font-family: "Golos Text", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19.2px;
+    letter-spacing: 0;
+
+
+  }
+  .text-semibold-16{
+    color: rebeccapurple;
+
+    font-family: "Golos Text", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19.2px;
+    letter-spacing: 0;
+
+  }
+  .text-regular-16{
+    color: rebeccapurple;
+
+    font-family: "Golos Text", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+    letter-spacing: 0;
+
+  }
+  .text-regular-14{
+    color: rebeccapurple;
+
+    font-family: "Golos Text", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.8px;
+    letter-spacing: 0;
+  }
+
+}

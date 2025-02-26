@@ -100,10 +100,14 @@ const App = () => {
                         src={new URL("/src/assets/logo/logo_black.png", import.meta.url)}
                 />
                 <nav className={clsx("menu", "black", "header-menu")}>
-                    <a href={"#about-us"}>О нас</a>
-                    <a href={"#projects"}>Проекты</a>
-                    <a href={"#team"}>Команда</a>
-                    <a href={"#contact-us"}>Связаться</a>
+                    <a className={clsx("text-medium-16", "link")}
+                        href={"#about-us"}>О нас</a>
+                    <a className={clsx("text-medium-16", "link")}
+                        href={"#projects"}>Проекты</a>
+                    <a className={clsx("text-medium-16", "link")}
+                        href={"#team"}>Команда</a>
+                    <a className={clsx("text-medium-16", "link")}
+                        href={"#contact-us"}>Связаться</a>
                 </nav>
                 <label className={clsx("menu-button")} htmlFor={"menu-toggle"}>
                     <span></span>
@@ -118,16 +122,16 @@ const App = () => {
 
                         <h1 className={clsx("title")}>
 
-                            <span>Море</span>
-                            <span>
+                            <span className={clsx("hero")}>Море</span>
+                            <span className={clsx("hero")}>
                                 приключений в каждой игре
                             </span>
                         </h1>
-                        <p className={clsx("description")}>
+                        <p className={clsx("description", "subtitle-medium")}>
                             Проекты, которые зовут за горизонт и пробуждают дух исследователя
                         </p>
                     </div>
-                    <button className={clsx("button", "primary")}
+                    <button className={clsx("button", "primary", "text-semibold-16")}
                             onClick={() => {
                                 navigateTo("contact-us");
                             }}
@@ -140,16 +144,17 @@ const App = () => {
                 </section>
                 <section id={"about-us"}
                          className={clsx("about", "section")}>
-                    <h2 className={clsx("title")}>О нас</h2>
+                    <h2 className={clsx("heading-h1")}>О нас</h2>
                     <div className={clsx("text")}>
-                        <span className={"meaning"}>Baitis</span> — игровая студия, вдохновлённая
-                        бескрайними просторами океана и духом приключений
+                        <span className={clsx("meaning", "text-semibold-28")}>Baitis</span>
+                        <span className={clsx("text", "text-regular-28")}> — игровая студия, вдохновлённая
+                        бескрайними просторами океана и духом приключений</span>
                     </div>
-                    <div className={clsx("text")}>
+                    <div className={clsx("text", "text-regular-28")}>
                         Наши игры — это захватывающие путешествия, где каждый игрок становится
                         исследователем, капитаном или первооткрывателем новых миров
                     </div>
-                    <div className={clsx("text", "highlight")}>
+                    <div className={clsx("text", "highlight", "text-regular-28")}>
                         Мы создаём увлекательные истории, головоломки и необычные игровые механики
                     </div>
                     <img src={new URL("/src/assets/turtle1.png", import.meta.url)}
@@ -161,21 +166,32 @@ const App = () => {
                 </section>
                 <section id={"projects"}
                          className={clsx("projects", "section")}>
-                    <h2 className={clsx("title")}>Проекты</h2>
+                    <h2 className={clsx("heading-h1")}>Проекты</h2>
                     <div className={clsx("grid-box")}>
                         {projectNames.map((name, index) => (
                             <div key={index}
                                  className={clsx("project")}>
                                 <img src={new URL(`/src/assets/projects/${name}.png`, import.meta.url)}
-                                     alt={name} />
+                                     alt={name}/>
                             </div>
                         ))}
+                        <button className={clsx("button", "primary", "text-semibold-16")}
+                                onClick={() => {
+                                    // navigateTo("contact-us");
+                                }}
+                                aria-label={"Показать все"}>
+                            Показать все
+                            <img src={new URL("/src/assets/arrows/arrow_long.svg", import.meta.url)}
+                                className={clsx("arrow")}
+                                alt="&#8595;" />
+
+                        </button>
 
                     </div>
                 </section>
                 <section id={"team"}
-                    className={clsx("team", "section")}>
-                    <h2 className={clsx("title")}>Команда</h2>
+                         className={clsx("team", "section")}>
+                    <h2 className={clsx("heading-h1")}>Команда</h2>
                     <div className={clsx("slider-wrapper")}>
                         <div className={clsx("slider")}>
                             {teamMembers.map((member, index) => (
@@ -189,12 +205,17 @@ const App = () => {
                                     />
                                     <div className={clsx("info")}>
                                         <h3 className={clsx("name")}>
-                                            {member.name} {member.surname}
+                                            <span className={clsx("subtitle-medium")}>
+                                                {member.name}
+                                            </span>
+                                            <span className={clsx("subtitle-medium")}>
+                                                {member.surname}
+                                            </span>
                                         </h3>
-                                        <p className={clsx("position")}>
+                                        <p className={clsx("position", "text-regular-16")}>
                                             {member.position}
                                         </p>
-                                        <p className={clsx("achievement")}>
+                                        <p className={clsx("achievement", "text-regular-14")}>
                                             {member.achievement}
                                         </p>
                                     </div>
@@ -212,7 +233,9 @@ const App = () => {
                                     >
                                 <img src={new URL("/src/assets/arrows/arrow_long.svg", import.meta.url)}
                                     className={clsx("arrow")}
-                                     alt={"Назад"} />
+                                     alt="&#8592;"
+
+                                />
                             </button>
                             <button className={clsx("button", "secondary")}
                                     onClick={() => {
@@ -223,7 +246,7 @@ const App = () => {
                                     }}>
                                 <img src={new URL("/src/assets/arrows/arrow_long.svg", import.meta.url)}
                                         className={clsx("arrow", "right")}
-                                        alt={"Вперед"} />
+                                        alt="&#8594;" />
 
                             </button>
                         </div>
@@ -232,9 +255,9 @@ const App = () => {
                 </section>
                 <section id={"contact-us"}
                     className={clsx("contact", "section")}>
-                    <h2 className={clsx("title")}>Связаться</h2>
+                    <h2 className={clsx("heading-h1")}>Связаться</h2>
                     <div className={clsx("content")}>
-                        <div className={clsx("text")}>
+                        <div className={clsx("text", "text-regular-28")}>
                             Напишите нам — и вместе мы создадим
                             нечто по-настоящему увлекательное!
                         </div>
@@ -243,17 +266,22 @@ const App = () => {
                                 <div className={clsx("address-item")}>
                                     <img src={new URL("/src/assets/icons/phone.svg", import.meta.url)}
                                         alt={""} />
-                                    <a href={"tel:+74951234567"}>+7 (495) 123-45-67</a>
+                                    <a className={clsx("subtitle-medium", "text")}
+                                        href={"tel:+74951234567"}>+7 (495) 123-45-67</a>
                                 </div>
                                 <div className={clsx("address-item")}>
                                     <img src={new URL("/src/assets/icons/mail.svg", import.meta.url)}
                                         alt={""} />
-                                    <a href={"mailto:mail@mail.ru"}>mail@mail.ru</a>
+                                    <a
+                                        className={clsx("subtitle-medium", "text")}
+                                        href={"mailto:mail@mail.ru"}>mail@mail.ru</a>
                                 </div>
                                 <div className={clsx("address-item")}>
                                     <img src={new URL("/src/assets/icons/location.svg", import.meta.url)}
                                         alt={""} />
-                                    <span>Москва, ул. Пушкина, д. Колотушкина</span>
+                                    <span
+                                        className={clsx("text", "subtitle-medium")}
+                                    >Москва, ул. Пушкина, д. Колотушкина</span>
                                 </div>
                             </div>
                             <div className={clsx("social")}>
@@ -284,16 +312,20 @@ const App = () => {
                     </div>
                     <form onSubmit={handleSubmit} className={clsx("form")}>
                         <label className={clsx("label")}>
+                            <span className={clsx("text", "text-regular-14")}>
                             Имя
+                            </span>
                             <input type={"text"}
-                                   className={clsx("input")}
+                                   className={clsx("input", "text-regular-14")}
                                    name={"name"}
                                    value={form.name}
                                    onChange={handleChange}
                                    required />
                         </label>
                         <label className={clsx("label")}>
+                            <span className={clsx("text", "text-regular-14")}>
                             Email
+                            </span>
                             <input type={"email"}
                                    className={clsx("input")}
                                    name={"email"}
@@ -302,9 +334,11 @@ const App = () => {
                                    required />
                         </label>
                         <label className={clsx("label")}>
+                            <span className={clsx("text", "text-regular-14")}>
                             Сообщение
+                            </span>
                             <textarea
-                                className={clsx("textarea")}
+                                className={clsx("textarea", "text-regular-14")}
                                 name={"message"}
                                       value={form.message}
                                       onChange={handleChange}
@@ -314,16 +348,16 @@ const App = () => {
                             <input type={"checkbox"}
                                       required />
                             <span className={"checkbox"}></span>
-                            <span className={"checkbox-text"}>
+                            <span className={clsx("checkbox-text", "text-regular-14")}>
                                 Я принимаю
                             </span>
                             <a href={"#"}
-                                 className={"link"}>
+                                 className={clsx("link", "text-regular-14")}>
                                согласие на обработку персональных данных</a>
                         </label>
 
 
-                        <button className={clsx("button", "light")}>
+                        <button className={clsx("button", "light", "text-semibold-16")}>
                             Отправить
                         </button>
                     </form>
@@ -341,12 +375,17 @@ const App = () => {
                        src={new URL("./assets/logo/logo_white.png", import.meta.url)}
                      />
                    <nav className={clsx("menu", "white")}>
-                        <a href={"#about-us"}>О нас</a>
-                        <a href={"#projects"}>Проекты</a>
-                        <a href={"#team"}>Команда</a>
-                        <a href={"#contact-us"}>Связаться</a>
+                        <a className={clsx("text-medium-16", "link")}
+                           href={"#about-us"}>О нас</a>
+                        <a className={clsx("text-medium-16", "link")}
+                           href={"#projects"}>Проекты</a>
+                        <a className={clsx("text-medium-16", "link")}
+                           href={"#team"}>Команда</a>
+                        <a className={clsx("text-medium-16", "link")}
+                           href={"#contact-us"}>Связаться</a>
                    </nav>
-                   <p className={clsx("copy-right")}>© 2025 Baitis</p>
+                   <p className={clsx("copy-right", "text-regular-14")}>
+                       &#169; 2025 Baitis</p>
                </div>
             </footer>
         </div>
