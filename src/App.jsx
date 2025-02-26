@@ -97,7 +97,7 @@ const App = () => {
                 <img className={clsx("logo", "black")}
                         aria-label={"Baitis"}
                         alt={"Baitis"}
-                        src={"./assets/logo/logo_black.png"}
+                        src={new URL("/src/assets/logo/logo_black.png", import.meta.url)}
                 />
                 <nav className={clsx("menu", "black", "header-menu")}>
                     <a href={"#about-us"}>О нас</a>
@@ -134,7 +134,9 @@ const App = () => {
                             aria-label={"Заказать"}>
                         Заказать
                     </button>
-                    <img className={clsx("image", "whales")} alt={""} />
+                    <img className={clsx("image", "whales")} alt={""}
+                        src={new URL("/src/assets/whales.png", import.meta.url)}
+                    />
                 </section>
                 <section id={"about-us"}
                          className={clsx("about", "section")}>
@@ -150,11 +152,11 @@ const App = () => {
                     <div className={clsx("text", "highlight")}>
                         Мы создаём увлекательные истории, головоломки и необычные игровые механики
                     </div>
-                    <img src={"./assets/turtle1.png"}
+                    <img src={new URL("/src/assets/turtle1.png", import.meta.url)}
                         className={clsx("image", "turtle")} alt={""} />
-                    <img src={"./assets/turtle2.png"}
+                    <img src={new URL("/src/assets/turtle2.png", import.meta.url)}
                         className={clsx("image", "turtle")} alt={""} />
-                    <img src={"./assets/turtle3.png"}
+                    <img src={new URL("/src/assets/turtle3.png", import.meta.url)}
                         className={clsx("image", "turtle")} alt={""} />
                 </section>
                 <section id={"projects"}
@@ -164,7 +166,7 @@ const App = () => {
                         {projectNames.map((name, index) => (
                             <div key={index}
                                  className={clsx("project")}>
-                                <img src={`./assets/projects/${name}.png`}
+                                <img src={new URL(`/src/assets/projects/${name}.png`, import.meta.url)}
                                      alt={name} />
                             </div>
                         ))}
@@ -179,10 +181,10 @@ const App = () => {
                             {teamMembers.map((member, index) => (
                                 <div key={index}
                                     className={clsx("member")}>
-                                    <img src={`./assets/team/${member.photo}`}
+                                    <img src={new URL(`/src/assets/team/${member.photo}`, import.meta.url)}
                                         alt={""}
                                          onError={(e) => {
-                                            e.target.src = "./assets/team/placeholder.png";
+                                            e.target.src = new URL("/src/assets/team/default.png", import.meta.url);
                                          }}
                                     />
                                     <div className={clsx("info")}>
@@ -208,7 +210,7 @@ const App = () => {
                                         }
                                     }}
                                     >
-                                <img src={"./assets/arrows/arrow_long.svg"}
+                                <img src={new URL("/src/assets/arrows/arrow_long.svg", import.meta.url)}
                                     className={clsx("arrow")}
                                      alt={"Назад"} />
                             </button>
@@ -219,7 +221,7 @@ const App = () => {
                                             slider.scrollLeft += 200;
                                         }
                                     }}>
-                                <img src={"./assets/arrows/arrow_long.svg"}
+                                <img src={new URL("/src/assets/arrows/arrow_long.svg", import.meta.url)}
                                         className={clsx("arrow", "right")}
                                         alt={"Вперед"} />
 
@@ -239,17 +241,17 @@ const App = () => {
                         <address className={clsx("address-box")}>
                             <div className={clsx("address-list")}>
                                 <div className={clsx("address-item")}>
-                                    <img src={"./assets/icons/phone.svg"}
+                                    <img src={new URL("/src/assets/icons/phone.svg", import.meta.url)}
                                         alt={""} />
                                     <a href={"tel:+74951234567"}>+7 (495) 123-45-67</a>
                                 </div>
                                 <div className={clsx("address-item")}>
-                                    <img src={"./assets/icons/email.svg"}
+                                    <img src={new URL("/src/assets/icons/mail.svg", import.meta.url)}
                                         alt={""} />
                                     <a href={"mailto:mail@mail.ru"}>mail@mail.ru</a>
                                 </div>
                                 <div className={clsx("address-item")}>
-                                    <img src={"./assets/icons/location.svg"}
+                                    <img src={new URL("/src/assets/icons/location.svg", import.meta.url)}
                                         alt={""} />
                                     <span>Москва, ул. Пушкина, д. Колотушкина</span>
                                 </div>
@@ -257,22 +259,22 @@ const App = () => {
                             <div className={clsx("social")}>
                                 <a href={"#"}
                                     className={clsx("social-link")}>
-                                    <img src={"./assets/social_icons/fb.svg"}
+                                    <img src={new URL("/src/assets/social_icons/fb.svg", import.meta.url)}
                                         alt={"Facebook"} />
                                 </a>
                                 <a href={"#"}
                                     className={clsx("social-link")}>
-                                    <img src={"./assets/social_icons/vk.svg"}
+                                    <img src={new URL("/src/assets/social_icons/vk.svg", import.meta.url)}
                                         alt={"VK"} />
                                 </a>
                                 <a href={"#"}
                                     className={clsx("social-link")}>
-                                    <img src={"./assets/social_icons/inst.svg"}
+                                    <img src={new URL("./assets/social_icons/inst.svg", import.meta.url)}
                                         alt={"Instagram"} />
                                 </a>
                                 <a href={"#"}
                                     className={clsx("social-link")}>
-                                    <img src={"./assets/social_icons/tg.svg"}
+                                    <img src={new URL("./assets/social_icons/tg.svg", import.meta.url)}
                                         alt={"Telegram"} />
                                 </a>
                             </div>
@@ -330,13 +332,14 @@ const App = () => {
             </main>
             <footer className={clsx("footer")}>
                 <img className={clsx("fish")}
-                    src={"./assets/fish.png"}
+                    src={new URL("./assets/fish.png", import.meta.url)}
                     alt={""} />
                <div className={clsx("content")}>
                    <img className={clsx("logo", "white")}
                         aria-label={"Baitis"}
                         alt={"Baitis"}
-                       src={"./assets/logo/logo_white.png"} />
+                       src={new URL("./assets/logo/logo_white.png", import.meta.url)}
+                     />
                    <nav className={clsx("menu", "white")}>
                         <a href={"#about-us"}>О нас</a>
                         <a href={"#projects"}>Проекты</a>
