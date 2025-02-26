@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './styles/colors.scss'
 import './styles/normalize.scss'
 import './styles/fonts.scss'
+import './styles/icons.scss'
 
 import App from './App.jsx'
 

@@ -264,20 +264,28 @@ const App = () => {
                         <address className={clsx("address-box")}>
                             <div className={clsx("address-list")}>
                                 <div className={clsx("address-item")}>
-                                    <img src={new URL("/src/assets/icons/phone.svg", import.meta.url)}
+                                    <img
+                                        className={clsx("icon")}
+
+                                        src={new URL("/src/assets/icons/phone.svg", import.meta.url)}
                                         alt={""} />
                                     <a className={clsx("subtitle-medium", "text")}
                                         href={"tel:+74951234567"}>+7 (495) 123-45-67</a>
                                 </div>
                                 <div className={clsx("address-item")}>
-                                    <img src={new URL("/src/assets/icons/mail.svg", import.meta.url)}
+                                    <img
+                                        className={clsx("icon")}
+
+                                        src={new URL("/src/assets/icons/mail.svg", import.meta.url)}
                                         alt={""} />
                                     <a
                                         className={clsx("subtitle-medium", "text")}
                                         href={"mailto:mail@mail.ru"}>mail@mail.ru</a>
                                 </div>
                                 <div className={clsx("address-item")}>
-                                    <img src={new URL("/src/assets/icons/location.svg", import.meta.url)}
+                                    <img
+                                        className={clsx("icon")}
+                                        src={new URL("/src/assets/icons/location.svg", import.meta.url)}
                                         alt={""} />
                                     <span
                                         className={clsx("text", "subtitle-medium")}
@@ -288,22 +296,33 @@ const App = () => {
                                 <a href={"#"}
                                     className={clsx("social-link")}>
                                     <img src={new URL("/src/assets/social_icons/fb.svg", import.meta.url)}
-                                        alt={"Facebook"} />
+                                        alt={"Facebook"}
+                                         className={clsx("social-icon")}
+                                    />
                                 </a>
                                 <a href={"#"}
                                     className={clsx("social-link")}>
                                     <img src={new URL("/src/assets/social_icons/vk.svg", import.meta.url)}
-                                        alt={"VK"} />
+                                        alt={"VK"}
+                                         className={clsx("social-icon")}
+
+                                    />
                                 </a>
                                 <a href={"#"}
                                     className={clsx("social-link")}>
                                     <img src={new URL("./assets/social_icons/inst.svg", import.meta.url)}
-                                        alt={"Instagram"} />
+                                        alt={"Instagram"}
+                                         className={clsx("social-icon")}
+
+                                    />
                                 </a>
                                 <a href={"#"}
                                     className={clsx("social-link")}>
                                     <img src={new URL("./assets/social_icons/tg.svg", import.meta.url)}
-                                        alt={"Telegram"} />
+                                        alt={"Telegram"}
+                                         className={clsx("social-icon")}
+
+                                    />
                                 </a>
                             </div>
 
