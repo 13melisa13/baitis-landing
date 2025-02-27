@@ -14,7 +14,7 @@
     flex-direction: column;
     gap: 100px;
     max-width: 1440px;
-    margin: 0 auto;
+    //margin: 0 auto;
   }
 }
 .logo{
@@ -186,7 +186,7 @@
 
 .section{
   box-sizing: border-box;
-  min-height: calc(100vh - 85px);
+  //min-height: calc(100vh - 85px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -229,12 +229,14 @@
 
 .sectionMain{
   position: relative;
-  margin-top: 85px;
+  margin-top: 100px;
   align-items: flex-start;
+  height: calc(100vh - 85px);
+
   .whales{
     position: absolute;
-    top: 0;
-    right: var(--padding-aside);
+    top: calc( -1 * clamp(300px, 35vw, 550px) / 2 + 50%);
+    left: calc(100% + 200px);
     width: clamp(300px, 35vw, 550px);
     height: clamp(300px, 35vw, 550px);
     background-image: url("/src/assets/whales.svg");
@@ -242,9 +244,12 @@
     background-repeat: no-repeat;
     background-position: center;
   }
+
   .content{
+    position: relative;
     display: flex;
     flex-direction: column;
+    align-self: flex-start;
     gap: 24px;
 
     width: clamp(300px, 40vw, 590px);
@@ -255,7 +260,6 @@
   }
 
 
-  height: calc(100vh - 85px);
   .title{
     display: flex;
     flex-direction: column;
@@ -310,14 +314,15 @@
 
   @media (max-width: 768px){
     align-items: center;
-    //height: unset;
+
 
     .whales{
+
       position: relative;
       order: 1;
-        width: 100%;
+      width: 100%;
       top: unset;
-        right: unset;
+      left: unset;
     }
     .content{
         order: 0;
@@ -330,7 +335,7 @@
       top: -10px;
     }
     .button{
-        order: 2;
+        align-self: center;
     }
 
 
@@ -339,7 +344,7 @@
 }
 
 .sectionAbout{
-
+  margin-bottom: 100px;
   .content{
     position: relative;
     width: 588px;
@@ -397,18 +402,41 @@
 }
 
 .sectionProjects{
+  gap: 40px;
   .gridBox{
     box-sizing: border-box;
     width: 100%;
-    flex-grow: 2;
+    grid-template-columns: 584px 607px; /* Ширина для первой строки */
+    grid-template-rows: 217px 232px 150px; /* Высота строк */
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px;
-    grid-auto-flow: dense;
-    @media (max-width: 768px){
-      grid-template-columns: 1fr;
+
+    row-gap: 16px;
+    column-gap: 8px;
+    align-items: center;
+    .group{
+      display: flex;
+      gap: 8px;
+    }
+
+
+    .project img{
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+    }
+    @media (max-width: 685px){
+      justify-content: center;
 
     }
+  }
+  .button{
+    background-color: var(--color-main-blue);
+    border: none;
+    color: var(--color-main-white);
+    padding: 15px 24px;
+    border-radius: 8px;
+    text-decoration: none;
   }
 }
 .sectionTeam{
