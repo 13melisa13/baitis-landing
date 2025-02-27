@@ -502,11 +502,15 @@
     overflow: hidden;
 
     .slider{
-      padding-right: var(--padding-aside);
+      padding: 10px var(--padding-aside) 10px 0;
+
       overflow: scroll;
       display: flex;
       gap: 32px;
       transition: transform 0.5s;
+    }
+    .slider::-webkit-scrollbar{
+      display: none;
     }
 
   }
@@ -531,6 +535,10 @@
   }
   .right{
     transform: rotate(180deg);
+  }
+  .disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 

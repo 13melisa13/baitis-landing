@@ -8,9 +8,35 @@ const App = () => {
     const [isHidden, setIsHidden] = useState(true);
     const [isDisabled, setIsDisabled] = useState(true);
     const [statusSend, setStatusSend] = useState('not-send');
+    useEffect(() => {
+        const slider = document.querySelector(".slider");
+        if (slider) {
+            const listener = slider.addEventListener("scroll", () => {
+                if (slider.scrollLeft === 0) {
+                    console.log("left end");
+                    setIsScrollableLeft(false);
+
+                } else {
+                    setIsScrollableLeft(true);
+                }
+                if (slider.scrollLeft + slider.clientWidth === slider.scrollWidth) {
+                    console.log("right end");
+                    setIsScrollableRight(false);
+                } else {
+                    setIsScrollableRight(true);
+                }
+            });
+
+            return () => {
+                slider.removeEventListener("scroll", listener);
+            }
+        }
+
+    }, []);
     // no, sending, error, success
     const [messageFromServer, setMessageFromServer] = useState([]);
-
+    const [isScrollableLeft, setIsScrollableLeft] = useState(false);
+    const [isScrollableRight, setIsScrollableRight] = useState(true);
     const teamMembers = [
         {
             name: "Анна",
@@ -311,7 +337,9 @@ const App = () => {
                             ))}
                         </div>
                         <div className={clsx(style.buttons)}>
-                            <button className={clsx(style.button)}
+                            <button className={clsx(style.button,
+                                !isScrollableLeft && style.disabled)}
+
                                     onClick={() => {
                                         const slider = document.querySelector(".slider");
                                         if (slider) {
@@ -320,7 +348,8 @@ const App = () => {
                                         }
                                     }}/>
 
-                            <button className={clsx(style.button, style.right)}
+                            <button className={clsx(style.button, style.right,
+                                !isScrollableRight && style.disabled)}
                                     onClick={() => {
                                         const slider = document.querySelector(".slider");
                                         if (slider) {
