@@ -132,9 +132,9 @@ const App = () => {
                         <h1 className={clsx("title")}>
 
                             <span className={clsx("hero")}>Море</span>
-                            {/*<span className={clsx("hero")}>*/}
-                            {/*    приключений в каждой игре*/}
-                            {/*</span>*/}
+                            <span className={clsx("hero")}>
+                                приключений в каждой игре
+                            </span>
                         </h1>
                         <p className={clsx("description", "subtitle-medium")}>
                             Проекты, которые зовут за горизонт и пробуждают дух исследователя
@@ -147,34 +147,34 @@ const App = () => {
                             aria-label={"Заказать"}>
                         Заказать
                     </button>
-                    <img className={clsx("image", "whales")} alt={""}
-                        src={new URL("/src/assets/whales.png", import.meta.url)}
-                    />
+                    <div className={style.whales}/>
+
                 </section>
                 <section id={"about-us"}
-                         className={clsx("about", "section")}>
+                         className={clsx(style.sectionAbout, style.section)}>
                     <h2 className={clsx("heading-h1")}>О нас</h2>
-                    <div className={clsx("text")}>
-                        <span className={clsx("meaning", "text-semibold-28")}>Baitis</span>
-                        <span className={clsx("text", "text-regular-28")}> — игровая студия, вдохновлённая
+                    <div className={style.content}>
+                        <div className={clsx(style.text)}>
+                            <span className={clsx(style.meaning, "text-semibold-28")}>Baitis</span>
+                            <span className={clsx(style.text, "text-regular-28")}> — игровая студия, вдохновлённая
                         бескрайними просторами океана и духом приключений</span>
+                        </div>
+                        <div className={clsx(style.text, "text-regular-28")}>
+                            Наши игры — это захватывающие путешествия, где каждый игрок становится
+                            исследователем, капитаном или первооткрывателем новых миров
+                        </div>
+                        <div className={clsx(style.text, style.highlight, "text-regular-28")}>
+                            Мы создаём увлекательные истории, головоломки и необычные игровые механики
+                        </div>
+                        <div className={clsx(style.turtle, style.turtle1)}/>
+                        <div className={clsx(style.turtle, style.turtle2)}/>
+                        <div className={clsx(style.turtle, style.turtle3)}/>
                     </div>
-                    <div className={clsx("text", "text-regular-28")}>
-                        Наши игры — это захватывающие путешествия, где каждый игрок становится
-                        исследователем, капитаном или первооткрывателем новых миров
-                    </div>
-                    <div className={clsx("text", "highlight", "text-regular-28")}>
-                        Мы создаём увлекательные истории, головоломки и необычные игровые механики
-                    </div>
-                    <img src={new URL("/src/assets/turtle1.png", import.meta.url)}
-                        className={clsx("image", "turtle")} alt={""} />
-                    <img src={new URL("/src/assets/turtle2.png", import.meta.url)}
-                        className={clsx("image", "turtle")} alt={""} />
-                    <img src={new URL("/src/assets/turtle3.png", import.meta.url)}
-                        className={clsx("image", "turtle")} alt={""} />
+
+
                 </section>
                 <section id={"projects"}
-                         className={clsx("projects", "section")}>
+                         className={clsx(style.sectionProjects, style.section)}>
                     <h2 className={clsx("heading-h1")}>Проекты</h2>
                     <div className={clsx("grid-box")}>
                         {projectNames.map((name, index) => (
@@ -199,7 +199,7 @@ const App = () => {
                     </div>
                 </section>
                 <section id={"team"}
-                         className={clsx("team", "section")}>
+                         className={clsx(style.sectionTeam, style.section)}>
                     <h2 className={clsx("heading-h1")}>Команда</h2>
                     <div className={clsx("slider-wrapper")}>
                         <div className={clsx("slider")}>
@@ -263,9 +263,10 @@ const App = () => {
 
                 </section>
                 <section id={"contact-us"}
-                    className={clsx("contact", "section")}>
+                    className={clsx(style.sectionContact, style.section)}>
                     <h2 className={clsx("heading-h1")}>Связаться</h2>
-                    <div className={clsx("content")}>
+                    <div className={clsx(style.content)}>
+                    <div className={clsx("description")}>
                         <div className={clsx("text", "text-regular-28")}>
                             Напишите нам — и вместе мы создадим
                             нечто по-настоящему увлекательное!
@@ -389,6 +390,7 @@ const App = () => {
                             Отправить
                         </button>
                     </form>
+                    </div>
 
                 </section>
             </main>

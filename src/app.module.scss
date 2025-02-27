@@ -162,8 +162,8 @@
 
     .menuToggle:checked ~ .mobile .menuButton span{
       transform: rotate(90deg);
-        background-color: transparent;
-      transition: background-color 0;
+      background-color: transparent;
+      transition: background-color 0s;
     }
     .menuToggle:checked ~ .mobile .menuButton span:before{
       top: 0;
@@ -185,14 +185,108 @@
 }
 
 .section{
+  box-sizing: border-box;
+  min-height: calc(100vh - 85px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 var(--padding-aside);
+  @media (min-width: 1440px){
+    padding: 0 120px;
+  }
+  gap: 56px;
+
+  h2{
+    color: var(--color-main-blue);
+    position: relative;
+    width: max-content;
+    margin-bottom: 28px;
+    align-self: flex-start;
+
+    &::before{
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 14px;
+      bottom: -20px;
+      left: 0;
+      background-image: url("/src/assets/wave_text.svg");
+      background-repeat: repeat-x;
+      background-position: center;
+      background-size: contain;
+
+
+    }
+  }
+
 
 }
 
 .sectionMain{
-  box-sizing: border-box;
   margin-top: 85px;
   height: calc(100vh - 85px);
-  display: flex;
+}
+
+.sectionAbout{
+
+  .content{
+    position: relative;
+    width: 588px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-direction: column;
+  }
+  .turtle{
+    position: absolute;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .turtle1{
+    width: clamp(200px, 30vw, 300px);
+    height: clamp(200px, 30vh, 300px);
+    right: calc(100% + clamp(20px, 3vw, 40px));
+    bottom: 0;
+    background-image: url("/src/assets/turtle2.svg");
+  }
+    .turtle2{
+        width: clamp(200px, 25vw, 300px);
+        height: clamp(160px, 20vh, 250px);
+        top: calc(100% - clamp(20px, 5vh, 40px));
+        right: calc((clamp(200px, 25vw, 300px) * -1));
+        background-image: url("/src/assets/turtle1.svg");
+    }
+  .turtle3{
+    height: clamp(160px, 20vh, 250px);
+    width: clamp(160px, 20vh, 250px);
+    top: calc(-1 * clamp(80px, 10vh, 125px));
+    right: calc(-1 * clamp(160px, 20vh, 250px));
+    background-image: url("/src/assets/turtle3.svg");
+  }
+  .text{
+    text-align: center;
+    color: var(--color-main-black);
+  }
+  .highlight, .meaning{
+    color: var(--color-main-blue);
+
+  }
+  @media  (max-width: 768px){
+    .turtle{
+      display: none;
+    }
+    .content{
+      width: unset;
+    }
+    .text{
+        text-align: left;
+    }
+
+
+  }
 }
 
 
