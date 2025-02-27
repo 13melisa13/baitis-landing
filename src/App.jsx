@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import "./app.scss";
+import style from "./app.module.scss";
 import {useState} from "react";
 
 
@@ -92,40 +92,49 @@ const App = () => {
     }
 
     return (
-        <div className={"layout"}>
-            <header className={clsx("header")}>
-                <img className={clsx("logo", "black")}
-                        aria-label={"Baitis"}
-                        alt={"Baitis"}
-                        src={new URL("/src/assets/logo/logo_black.png", import.meta.url)}
-                />
-                <nav className={clsx("menu", "black", "header-menu")}>
-                    <a className={clsx("text-medium-16", "link")}
-                        href={"#about-us"}>О нас</a>
-                    <a className={clsx("text-medium-16", "link")}
-                        href={"#projects"}>Проекты</a>
-                    <a className={clsx("text-medium-16", "link")}
-                        href={"#team"}>Команда</a>
-                    <a className={clsx("text-medium-16", "link")}
-                        href={"#contact-us"}>Связаться</a>
+        <div className={clsx(style.layout)}>
+            <header className={clsx(style.header)}>
+                <input id={"menuToggle"}
+                       className={clsx(style.menuToggle)}
+                       type={"checkbox"}/>
+                <div className={clsx(style.mobile)}>
+
+                    <a href={"/"}><img className={clsx(style.logo)}
+                                       aria-label={"Baitis"}
+                                       alt={"Baitis"}
+                                       src={new URL("/src/assets/logo/logo_black.png", import.meta.url)}
+                    /></a>
+                    <label className={clsx(style.menuButton)}
+                           htmlFor={"menuToggle"}>
+                        <span></span>
+                    </label>
+                </div>
+
+
+                <nav className={clsx(style.menu)}>
+                    <a className={clsx("text-medium-16", style.link)}
+                       href={"#about-us"}>О нас</a>
+                    <a className={clsx("text-medium-16", style.link)}
+                       href={"#projects"}>Проекты</a>
+                    <a className={clsx("text-medium-16", style.link)}
+                       href={"#team"}>Команда</a>
+                    <a className={clsx("text-medium-16", style.link)}
+                       href={"#contact-us"}>Связаться</a>
                 </nav>
-                <label className={clsx("menu-button")} htmlFor={"menu-toggle"}>
-                    <span></span>
-                </label>
-                <input id={"menu-toggle"} type={"checkbox"} />
+
 
             </header>
-            <main className={clsx("main")}>
+            <main className={clsx(style.main)}>
                 <section id={"main"}
-                         className={clsx("main-section", "section")}>
+                         className={clsx(style.sectionMain, style.section)}>
                     <div className={clsx("content")}>
 
                         <h1 className={clsx("title")}>
 
                             <span className={clsx("hero")}>Море</span>
-                            <span className={clsx("hero")}>
-                                приключений в каждой игре
-                            </span>
+                            {/*<span className={clsx("hero")}>*/}
+                            {/*    приключений в каждой игре*/}
+                            {/*</span>*/}
                         </h1>
                         <p className={clsx("description", "subtitle-medium")}>
                             Проекты, которые зовут за горизонт и пробуждают дух исследователя
@@ -383,29 +392,29 @@ const App = () => {
 
                 </section>
             </main>
-            <footer className={clsx("footer")}>
-                <img className={clsx("fish")}
-                    src={new URL("./assets/fish.png", import.meta.url)}
-                    alt={""} />
-               <div className={clsx("content")}>
-                   <img className={clsx("logo", "white")}
-                        aria-label={"Baitis"}
-                        alt={"Baitis"}
-                       src={new URL("./assets/logo/logo_white.png", import.meta.url)}
-                     />
-                   <nav className={clsx("menu", "white")}>
-                        <a className={clsx("text-medium-16", "link")}
+            <footer className={clsx(style.footer)}>
+                <span className={clsx(style.fish)}/>
+                <div className={clsx(style.content)}>
+                    <a href={"/"}>
+                        <img className={clsx(style.logo)}
+                             aria-label={"Baitis"}
+                             alt={"Baitis"}
+                             src={new URL("./assets/logo/logo_white.png", import.meta.url)}
+                        /> </a>
+                    <nav className={clsx(style.menu)}>
+                        <a className={clsx("text-medium-16", style.link)}
                            href={"#about-us"}>О нас</a>
-                        <a className={clsx("text-medium-16", "link")}
+                        <a className={clsx("text-medium-16", style.link)}
                            href={"#projects"}>Проекты</a>
-                        <a className={clsx("text-medium-16", "link")}
+                        <a className={clsx("text-medium-16", style.link)}
                            href={"#team"}>Команда</a>
-                        <a className={clsx("text-medium-16", "link")}
+                        <a className={clsx("text-medium-16", style.link)}
                            href={"#contact-us"}>Связаться</a>
-                   </nav>
-                   <p className={clsx("copy-right", "text-regular-14")}>
-                       &#169; 2025 Baitis</p>
-               </div>
+                    </nav>
+
+                </div>
+                <p className={clsx(style.copyright, "text-regular-14")}>
+                    &#169; 2025 Baitis</p>
             </footer>
         </div>
     );
