@@ -1,6 +1,6 @@
 Последняя задеплоенная версия находится по [ссылке](https://13melisa13.github.io/baitis-landing/)
 
-Ветка gh-pages: https://github.com/13melisa13/baitis-landing/tree/gh-pages
+Ветка gh-pages: https://github.com/13melisa13/baitis-landing/tree/gh-pg
 
 
 Сборка проекта и деплой на gh-pages:
