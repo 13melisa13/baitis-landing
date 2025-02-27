@@ -5,6 +5,10 @@ import {useEffect, useState} from "react";
 
 const App = () => {
     const [isHidden, setIsHidden] = useState(true);
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [statusSend, setStatusSend] = useState('not-send');
+    // no, sending, error, success
+    const [messageFromServer, setMessageFromServer] = useState([]);
 
     const teamMembers = [
         {
@@ -60,14 +64,16 @@ const App = () => {
 
     const navigateTo = (id) => {
         const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
+        if (!element) return;
+
+        const offset = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: offset, behavior: "smooth" });
     }
     const [form, setForm] = useState({
         name: "",
         email: "",
-        message: ""
+        message: "",
+        isAgree: false
     });
     const handleChange = (e) => {
         setForm({
@@ -75,10 +81,61 @@ const App = () => {
             [e.target.name]: e.target.value
         });
     }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form);
+        // console.log(form);
+        setStatusSend('sending');
+        setMessageFromServer([]);
+
+        fetch("https://httpbin.org/post", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(form)
+        })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                setForm({
+                    name: "",
+                    email: "",
+                    message: "",
+                    isAgree: false
+                });
+                setStatusSend('success');
+                setMessageFromServer(prevState => {
+                    return [...prevState, 'Данные успешно отправлены'];
+                })
+        })
+            .catch(() => {
+                setStatusSend('error');
+                setMessageFromServer(prevState =>
+                    [...prevState, 'Ошибка при отправке данных']
+                );
+            });
     }
+    useEffect(() => {
+        const isFormValid = () => {
+            return form.name.length > 0
+                && form.email.length > 0
+                && form.email.includes('@')
+                && form.message.length > 0
+                && form.isAgree;
+        }
+        if (statusSend === 'error' || statusSend === 'success') {
+            setTimeout(() => {
+                setStatusSend('not-send');
+                setMessageFromServer(
+                    []
+                )
+            }, 3000);
+
+        }
+        setIsDisabled(!isFormValid());
+    }, [form]);
+
 
     return (
         <div className={clsx(style.layout)}>
@@ -88,7 +145,7 @@ const App = () => {
                        type={"checkbox"}/>
                 <div className={clsx(style.mobile)}>
 
-                    <a href={"/"}><img className={clsx(style.logo)}
+                    <a href={"#main"}><img className={clsx(style.logo)}
                                        aria-label={"Baitis"}
                                        alt={"Baitis"}
                                        src={new URL("/src/assets/logo/logo_black.png", import.meta.url)}
@@ -166,81 +223,84 @@ const App = () => {
 
 
                 </section>
-                {/*<section id={"projects"}*/}
-                {/*         className={clsx(style.sectionProjects, style.section)}>*/}
-                {/*    <h2 className={clsx("heading-h1")}>Проекты</h2>*/}
-                {/*    <div className={clsx(style.gridBox)}>*/}
-                {/*        <div className={clsx(style.group)}>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/1.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/2.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className={clsx(style.group)}>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/3.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/4.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className={clsx(style.group)}>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/5.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/6.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className={clsx(style.group)}>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/7.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/8.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/9.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*        <div className={clsx(style.group)}>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/10.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*            <div className={clsx(style.project)}>*/}
-                {/*                <img src={new URL(`/src/assets/projects/11.png`, import.meta.url)}*/}
-                {/*                     alt={''}/>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
+                <section id={"projects"}
+                         className={clsx(style.sectionProjects, style.section)}>
+                    <h2 className={clsx("heading-h1")}>Проекты</h2>
+                    <div className={clsx(style.gridBox)}>
+
+                            <div className={clsx(style.project)}>
+                                <img src={new URL(`/src/assets/projects/1.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                            <div className={clsx(style.project)} id={"project2"}>
+                                <img src={new URL(`/src/assets/projects/2.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+
+                            <div className={clsx(style.project)} id={"project3"}>
+                                <img src={new URL(`/src/assets/projects/3.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                        {(!isHidden || document.documentElement.clientWidth > 685)
+                            &&
+                            <>
+                            <div className={clsx(style.project)}>
+                                <img src={new URL(`/src/assets/projects/4.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+
+                            <div className={clsx(style.project)}>
+                                <img src={new URL(`/src/assets/projects/5.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                            <div className={clsx(style.project)}>
+                                <img src={new URL(`/src/assets/projects/6.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+
+                            <div className={clsx(style.project)}>
+                                <img src={new URL(`/src/assets/projects/7.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                            <div className={clsx(style.project)}>
+                                <img src={new URL(`/src/assets/projects/8.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                            <div className={clsx(style.project)}>
+                                <img src={new URL(`/src/assets/projects/9.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                            <div className={clsx(style.project, style.projectLast)}>
+                                <img src={new URL(`/src/assets/projects/10.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                            <div className={clsx(style.project, style.projectLast)}>
+                                <img src={new URL(`/src/assets/projects/11.png`, import.meta.url)}
+                                     alt={''}/>
+                            </div>
+                            </>
+                    }
 
 
-                {/*        </div>*/}
-                {/*        {document.documentElement.clientWidth <= 685 &&*/}
+                        </div>
+                        {document.documentElement.clientWidth <= 685 &&
 
-                {/*            <button className={clsx(style.button,*/}
-                {/*                isHidden ? style.hidden : style.show,*/}
-                {/*                "text-semibold-16")}*/}
-                {/*            onClick={() => {*/}
-                {/*                setIsHidden(!isHidden);*/}
-                {/*            }}*/}
-                {/*            aria-label={isHidden ? "Показать все" : "Скрыть"}>*/}
-                {/*        {isHidden ? "Показать все" : "Скрыть"}*/}
-                {/*    </button>*/}
-                {/*    }*/}
+                            <button className={clsx(style.button,
+                                isHidden ? style.hidden : style.show,
+                                "text-semibold-16")}
+                            onClick={() => {
+                                // if (isHidden) {
+                                    navigateTo("project2");
 
-                {/*</section>*/}
+                                // }
+                                setIsHidden(!isHidden);
+                            }}
+                            aria-label={isHidden ? "Показать все" : "Скрыть"}>
+                        {isHidden ? "Показать все" : "Скрыть"}
+                    </button>
+                    }
+
+                </section>
                 {/*<section id={"team"}*/}
                 {/*         className={clsx(style.sectionTeam, style.section)}>*/}
                 {/*    <h2 className={clsx("heading-h1")}>Команда</h2>*/}
@@ -305,142 +365,216 @@ const App = () => {
                 {/*    </div>*/}
 
                 {/*</section>*/}
-                {/*<section id={"contact-us"}*/}
-                {/*    className={clsx(style.sectionContact, style.section)}>*/}
-                {/*    <h2 className={clsx("heading-h1")}>Связаться</h2>*/}
-                {/*    <div className={clsx(style.content)}>*/}
-                {/*    <div className={clsx("description")}>*/}
-                {/*        <div className={clsx("text", "text-regular-28")}>*/}
-                {/*            Напишите нам — и вместе мы создадим*/}
-                {/*            нечто по-настоящему увлекательное!*/}
-                {/*        </div>*/}
-                {/*        <address className={clsx("address-box")}>*/}
-                {/*            <div className={clsx("address-list")}>*/}
-                {/*                <div className={clsx("address-item")}>*/}
-                {/*                    <img*/}
-                {/*                        className={clsx("icon")}*/}
+                <section id={"contact-us"}
+                    className={clsx(style.sectionContact, style.section)}>
+                    <h2 className={clsx("heading-h1")}>Связаться</h2>
+                    <div className={clsx(style.content)}>
+                    <div className={clsx("description")}>
+                        <div className={clsx("text", "text-regular-28")}>
+                            Напишите нам — и вместе мы создадим
+                            нечто по-настоящему увлекательное!
+                        </div>
+                        <address className={clsx("address-box")}>
+                            <div className={clsx("address-list")}>
+                                <div className={clsx("address-item")}>
+                                    <img
+                                        className={clsx("icon")}
 
-                {/*                        src={new URL("/src/assets/icons/phone.svg", import.meta.url)}*/}
-                {/*                        alt={""} />*/}
-                {/*                    <a className={clsx("subtitle-medium", "text")}*/}
-                {/*                        href={"tel:+74951234567"}>+7 (495) 123-45-67</a>*/}
-                {/*                </div>*/}
-                {/*                <div className={clsx("address-item")}>*/}
-                {/*                    <img*/}
-                {/*                        className={clsx("icon")}*/}
+                                        src={new URL("/src/assets/icons/phone.svg", import.meta.url)}
+                                        alt={""} />
+                                    <a className={clsx("subtitle-medium", "text")}
+                                        href={"tel:+74951234567"}>+7 (495) 123-45-67</a>
+                                </div>
+                                <div className={clsx("address-item")}>
+                                    <img
+                                        className={clsx("icon")}
 
-                {/*                        src={new URL("/src/assets/icons/mail.svg", import.meta.url)}*/}
-                {/*                        alt={""} />*/}
-                {/*                    <a*/}
-                {/*                        className={clsx("subtitle-medium", "text")}*/}
-                {/*                        href={"mailto:mail@mail.ru"}>mail@mail.ru</a>*/}
-                {/*                </div>*/}
-                {/*                <div className={clsx("address-item")}>*/}
-                {/*                    <img*/}
-                {/*                        className={clsx("icon")}*/}
-                {/*                        src={new URL("/src/assets/icons/location.svg", import.meta.url)}*/}
-                {/*                        alt={""} />*/}
-                {/*                    <span*/}
-                {/*                        className={clsx("text", "subtitle-medium")}*/}
-                {/*                    >Москва, ул. Пушкина, д. Колотушкина</span>*/}
-                {/*                </div>*/}
-                {/*            </div>*/}
-                {/*            <div className={clsx("social")}>*/}
-                {/*                <a href={"#"}*/}
-                {/*                    className={clsx("social-link")}>*/}
-                {/*                    <img src={new URL("/src/assets/social_icons/fb.svg", import.meta.url)}*/}
-                {/*                        alt={"Facebook"}*/}
-                {/*                         className={clsx("social-icon")}*/}
-                {/*                    />*/}
-                {/*                </a>*/}
-                {/*                <a href={"#"}*/}
-                {/*                    className={clsx("social-link")}>*/}
-                {/*                    <img src={new URL("/src/assets/social_icons/vk.svg", import.meta.url)}*/}
-                {/*                        alt={"VK"}*/}
-                {/*                         className={clsx("social-icon")}*/}
+                                        src={new URL("/src/assets/icons/mail.svg", import.meta.url)}
+                                        alt={""} />
+                                    <a
+                                        className={clsx("subtitle-medium", "text")}
+                                        href={"mailto:mail@mail.ru"}>mail@mail.ru</a>
+                                </div>
+                                <div className={clsx("address-item")}>
+                                    <img
+                                        className={clsx("icon")}
+                                        src={new URL("/src/assets/icons/location.svg", import.meta.url)}
+                                        alt={""} />
+                                    <span
+                                        className={clsx("text", "subtitle-medium")}
+                                    >Москва, ул. Пушкина, д. Колотушкина</span>
+                                </div>
+                            </div>
+                            <div className={clsx("social")}>
+                                <a href={"#"}
+                                    className={clsx("social-link")}>
+                                    <img src={new URL("/src/assets/social_icons/fb.svg", import.meta.url)}
+                                        alt={"Facebook"}
+                                         className={clsx("social-icon")}
+                                    />
+                                </a>
+                                <a href={"#"}
+                                    className={clsx("social-link")}>
+                                    <img src={new URL("/src/assets/social_icons/vk.svg", import.meta.url)}
+                                        alt={"VK"}
+                                         className={clsx("social-icon")}
 
-                {/*                    />*/}
-                {/*                </a>*/}
-                {/*                <a href={"#"}*/}
-                {/*                    className={clsx("social-link")}>*/}
-                {/*                    <img src={new URL("./assets/social_icons/inst.svg", import.meta.url)}*/}
-                {/*                        alt={"Instagram"}*/}
-                {/*                         className={clsx("social-icon")}*/}
+                                    />
+                                </a>
+                                <a href={"#"}
+                                    className={clsx("social-link")}>
+                                    <img src={new URL("./assets/social_icons/inst.svg", import.meta.url)}
+                                        alt={"Instagram"}
+                                         className={clsx("social-icon")}
 
-                {/*                    />*/}
-                {/*                </a>*/}
-                {/*                <a href={"#"}*/}
-                {/*                    className={clsx("social-link")}>*/}
-                {/*                    <img src={new URL("./assets/social_icons/tg.svg", import.meta.url)}*/}
-                {/*                        alt={"Telegram"}*/}
-                {/*                         className={clsx("social-icon")}*/}
+                                    />
+                                </a>
+                                <a href={"#"}
+                                    className={clsx("social-link")}>
+                                    <img src={new URL("./assets/social_icons/tg.svg", import.meta.url)}
+                                        alt={"Telegram"}
+                                         className={clsx("social-icon")}
 
-                {/*                    />*/}
-                {/*                </a>*/}
-                {/*            </div>*/}
+                                    />
+                                </a>
+                            </div>
 
-                {/*        </address>*/}
+                        </address>
 
-                {/*    </div>*/}
-                {/*    <form onSubmit={handleSubmit} className={clsx("form")}>*/}
-                {/*        <label className={clsx("label")}>*/}
-                {/*            <span className={clsx("text", "text-regular-14")}>*/}
-                {/*            Имя*/}
-                {/*            </span>*/}
-                {/*            <input type={"text"}*/}
-                {/*                   className={clsx("input", "text-regular-14")}*/}
-                {/*                   name={"name"}*/}
-                {/*                   value={form.name}*/}
-                {/*                   onChange={handleChange}*/}
-                {/*                   required />*/}
-                {/*        </label>*/}
-                {/*        <label className={clsx("label")}>*/}
-                {/*            <span className={clsx("text", "text-regular-14")}>*/}
-                {/*            Email*/}
-                {/*            </span>*/}
-                {/*            <input type={"email"}*/}
-                {/*                   className={clsx("input")}*/}
-                {/*                   name={"email"}*/}
-                {/*                   value={form.email}*/}
-                {/*                   onChange={handleChange}*/}
-                {/*                   required />*/}
-                {/*        </label>*/}
-                {/*        <label className={clsx("label")}>*/}
-                {/*            <span className={clsx("text", "text-regular-14")}>*/}
-                {/*            Сообщение*/}
-                {/*            </span>*/}
-                {/*            <textarea*/}
-                {/*                className={clsx("textarea", "text-regular-14")}*/}
-                {/*                name={"message"}*/}
-                {/*                      value={form.message}*/}
-                {/*                      onChange={handleChange}*/}
-                {/*                      required />*/}
-                {/*        </label>*/}
-                {/*        <label className={clsx("label")}>*/}
-                {/*            <input type={"checkbox"}*/}
-                {/*                      required />*/}
-                {/*            <span className={"checkbox"}></span>*/}
-                {/*            <span className={clsx("checkbox-text", "text-regular-14")}>*/}
-                {/*                Я принимаю*/}
-                {/*            </span>*/}
-                {/*            <a href={"#"}*/}
-                {/*                 className={clsx("link", "text-regular-14")}>*/}
-                {/*               согласие на обработку персональных данных</a>*/}
-                {/*        </label>*/}
+                    </div>
+                    <form onSubmit={handleSubmit}
 
+                          className={clsx(style.form)}>
+                        <label className={clsx(style.label)}>
+                            <span className={clsx(style.text, "text-regular-14")}>
+                            Имя
+                            </span>
+                            <input
+                                disabled={statusSend === 'sending'}
+                                type={"text"}
+                                   placeholder={"Как к вам обращаться?"}
 
-                {/*        <button className={clsx("button", "light", "text-semibold-16")}>*/}
-                {/*            Отправить*/}
-                {/*        </button>*/}
-                {/*    </form>*/}
-                {/*    </div>*/}
+                                   className={clsx("input", "text-regular-14"
+                                        , messageFromServer.find((message) => message === "Имя обязательно для заполнения") && style.error)}
 
-                {/*</section>*/}
+                                   name={"name"}
+                                   value={form.name}
+                                   onChange={handleChange}
+                                   onInvalid={(e) => {
+                                   setMessageFromServer(prev => [...prev, "Имя обязательно для заполнения"]);
+                                   }}
+                                      onInput={(e) => {
+                                        setMessageFromServer(prev => prev.filter((message) => message !== "Имя обязательно для заполнения"));
+                                      }}
+                                   required />
+                        </label>
+                        <label className={clsx(style.label)}>
+                            <span className={clsx(style.text, "text-regular-14")}>
+                            Email
+                            </span>
+                            <input type={"email"}
+                                   disabled={statusSend === 'sending'}
+
+                                   placeholder={"Куда прислать ответ?"}
+                                   className={clsx("input", "text-regular-14",
+                                       messageFromServer.find((message) => message === "Некорректный email") && style.error)}
+                                   name={"email"}
+                                   onInvalid={(e) => {
+                                        setMessageFromServer(prevState => [...prevState, "Некорректный email"]);
+                                   }}
+                                   onInput={(e) => {
+                                       setMessageFromServer(prevState => prevState.filter((message) => message !== "Некорректный email"));
+                                   }}
+                                   value={form.email}
+                                   onChange={handleChange}
+                                   maxLength={50}
+                                   required />
+                        </label>
+                        <label className={clsx(style.label)}>
+                            <span className={clsx(style.text, "text-regular-14")}>
+                            Сообщение
+                            </span>
+                            <textarea
+                                disabled={statusSend === 'sending'}
+
+                                placeholder={"Опишите вашу идею или задайте вопрос"}
+                                className={clsx("textarea", "text-regular-14",
+                                    messageFromServer.find((message) => message === "Сообщение обязательно для заполнения") && style.error)}
+                                name={"message"}
+                                onInvalid={(e) => {
+                                    setMessageFromServer(prevState => [...prevState, "Сообщение обязательно для заполнения"]);
+                                }}
+                                onInput={(e) => {
+                                    setMessageFromServer(prevState => prevState.filter((message) => message !== "Сообщение обязательно для заполнения"));
+                                }}
+                                      value={form.message}
+                                      onChange={handleChange}
+                                        maxLength={500}
+                                      required />
+                        </label>
+                        <label className={clsx( style.checkbox)}>
+                            <input type={"checkbox"} required
+                                   disabled={statusSend === 'sending'}
+
+                                   onInvalid={(e) => {
+                                       setMessageFromServer(prevState => [...prevState, "Вы должны принять соглашение"]);
+                                   }}
+                                      onInput={(e) => {
+                                          setMessageFromServer(prevState => prevState.filter((message) => message !== "Вы должны принять соглашение"));
+                                      }
+                                      }
+                                      className={clsx(style.checkbox)}
+                                      name={"isAgree"}
+                                      checked={form.isAgree}
+                                      onChange={(e) => {
+                                        setForm({
+                                             ...form,
+                                             isAgree: e.target.checked
+                                        });
+                                      }}
+                            />
+                            <span className={clsx(style.checkboxBox, form.isAgree && style.checked)}/>
+                            <div className={clsx(style.textBox)}>
+                                <span className={clsx(style.text, "text-regular-14")}>
+                                    Я принимаю
+                                </span>
+                                <a href={""}
+                                   className={clsx(style.link, "text-regular-14")}>
+                                    согласие на обработку персональных данных</a>
+                            </div>
+
+                        </label>
+                        <button
+                            disabled={statusSend === 'sending' || isDisabled}
+                            className={clsx(style.button,
+                            isDisabled ?  style.disabled : "",
+                                statusSend === 'sending' ? style.sending : "",
+                            "text-semibold-16")}>
+                            Отправить
+                        </button>
+                        {Array.isArray(messageFromServer) &&
+                        messageFromServer.length > 0 &&
+
+                        <div className={clsx(style.message,
+                            "text-regular-16",
+                            statusSend === 'error' ? style.error : "",
+                            statusSend === 'success' ? style.success : "")}>
+                            {messageFromServer.map((message, index) => (
+                                <div key={index}>
+                                    {message}
+                                </div>
+                            ))}
+
+                        </div>}
+                    </form>
+                    </div>
+
+                </section>
             </main>
             <footer className={clsx(style.footer)}>
                 <span className={clsx(style.fish)}/>
                 <div className={clsx(style.content)}>
-                    <a href={"/"}>
+                    <a href={"#main"}>
                         <img className={clsx(style.logo)}
                              aria-label={"Baitis"}
                              alt={"Baitis"}

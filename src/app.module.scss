@@ -130,6 +130,8 @@
     }
 
     .menuButton {
+      cursor: pointer;
+
         display: flex;
         align-items: center;
         width: 32px;
@@ -236,7 +238,7 @@
   .whales{
     position: absolute;
     top: calc( -1 * clamp(300px, 35vw, 550px) / 2 + 50%);
-    left: calc(100% + 200px);
+    left: calc(100% + clamp(100px, 15vw, 200px));
     width: clamp(300px, 35vw, 550px);
     height: clamp(300px, 35vw, 550px);
     background-image: url("/src/assets/whales.svg");
@@ -303,12 +305,13 @@
   }
 
   .button{
+    cursor: pointer;
+
     align-self: flex-start;
     background-color: var(--color-main-black);
     color: var(--color-main-white);
     padding: 15px 24px;
     border-radius: 8px;
-    text-decoration: none;
 
   }
 
@@ -335,6 +338,8 @@
       top: -10px;
     }
     .button{
+      cursor: pointer;
+
         align-self: center;
     }
 
@@ -344,7 +349,8 @@
 }
 
 .sectionAbout{
-  margin-bottom: 100px;
+  overflow: hidden;
+  padding-bottom: 150px;
   .content{
     position: relative;
     width: 588px;
@@ -352,6 +358,7 @@
     gap: 24px;
     align-items: center;
     flex-direction: column;
+
   }
   .turtle{
     position: absolute;
@@ -389,6 +396,7 @@
 
   }
   @media  (max-width: 768px){
+    padding-bottom: 0;
     .turtle{
       display: none;
     }
@@ -406,38 +414,79 @@
   .gridBox{
     box-sizing: border-box;
     width: 100%;
-    grid-template-columns: 584px 607px; /* Ширина для первой строки */
-    grid-template-rows: 217px 232px 150px; /* Высота строк */
-    display: grid;
 
+    display: flex;
+    flex-wrap: wrap;
     row-gap: 16px;
     column-gap: 8px;
     align-items: center;
-    .group{
+    //justify-content: center;
+
+
+    .project{
+      flex-grow: 1;
       display: flex;
-      gap: 8px;
+      flex-direction: column;
+      align-items: center;
+      //
+    }
+    .project.projectLast{
+      flex-grow: 0;
+      @media (max-width: 768px){
+        flex-grow: 1;
+        margin: 0 auto;
+        max-width: 350px;
+      }
     }
 
 
+
+
     .project img{
+
       width: 100%;
       height: auto;
       object-fit: cover;
       object-position: center;
     }
-    @media (max-width: 685px){
-      justify-content: center;
 
-    }
+
   }
   .button{
-    background-color: var(--color-main-blue);
+    background-color: var(--color-main-black);
     border: none;
+    cursor: pointer;
+
     color: var(--color-main-white);
     padding: 15px 24px;
     border-radius: 8px;
     text-decoration: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::after{
+      transition: all 0.3s;
+      content: '';
+      width: 16px;
+      height: 16px;
+      position: relative;
+
+
+      background-image: url("/src/assets/arrows/arrow_short.svg");
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    &.hidden::after{
+      transform: rotate(90deg);
+    }
+    &.show::after{
+      transform: rotate(-90deg);
+    }
   }
+
 }
 .sectionTeam{
   .sliderWrapper{
@@ -460,6 +509,219 @@
   }
 }
 
+.sectionContact{
+  .content{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    @media (max-width: 768px){
+      flex-direction: column;
+    }
+
+  }
+  .description{
+
+  }
+  .form{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px;
+    background-color: var(--color-main-white);
+    width: clamp(300px, 50vw, 690px);
+    box-shadow: 0px 4px 15px 0px rgba(146, 159, 185, 0.2);
+    border-radius: 16px;
+    border: 1px solid var(--color-system-gray);
+    .label{
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      .text, input, textarea{
+        color: var(--color-main-black);
+      }
+        .text{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+      .text::after{
+        content: '*';
+        color: red;
+
+      }
+      .link{
+        color: var(--color-main-blue);
+        text-decoration: none;
+      }
+      input{
+        transition: all 0.3s;
+
+        padding: 8px;
+        border: 2px solid var(--color-system-gray);
+        border-radius: 4px;
+        outline: none;
+        &:focus, &:active, &:hover:focus, &:hover:active{
+          border-color: var(--color-main-blue);
+        }
+        &:hover{
+          border-color: var(--color-system-blue);
+        }
+        &::placeholder{
+          color: var(--color-system-black);
+        }
+      }
+        textarea{
+            padding: 8px;
+            border: 2px solid var(--color-system-gray);
+            border-radius: 4px;
+            resize: none;
+            height: 184px;
+          transition: all 0.3s;
+
+            outline: none;
+          &:focus, &:active, &:hover:focus, &:hover:active{
+            border-color: var(--color-main-blue);
+          }
+          &:hover{
+            border-color: var(--color-system-blue);
+          }
+          &::placeholder{
+            color: var(--color-system-black);
+          }
+
+        }
+
+
+    }
+    .checkbox{
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      align-items: center;
+      &:focus  .checkboxBox, &:active  .checkboxBox, &:hover:focus  .checkboxBox, &:hover:active  .checkboxBox{
+        border-color: var(--color-main-blue);
+      }
+      &:hover  .checkboxBox{
+        border-color: var(--color-system-blue);
+      }
+      input{
+        display: none;
+      }
+      .text{
+        color: var(--color-main-black);
+      }
+      .link{
+        color: var(--color-main-blue);
+        text-decoration: none;
+      }
+
+      .checkboxBox{
+        box-sizing: border-box;
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--color-system-gray);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+          border-color: var(--color-system-blue);
+        }
+      }
+        .checkboxBox.checked{
+            background-color: var(--color-main-blue);
+            border: 1px solid var(--color-main-blue);
+            background-image: url("/src/assets/checked.svg");
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+
+      .text::after{
+        content: ' '
+      }
+      .link{
+        display: inline;
+
+      }
+    }
+    .message{
+      display: flex;
+
+        flex-direction: column;
+        gap: 8px;
+      &.error{
+        color: red;
+      }
+        &.success{
+            color: green;
+        }
+      div{
+        color: inherit;
+      }
+
+    }
+    .button {
+      background-color: var(--color-main-blue);
+      color: var(--color-main-white);
+      border: none;
+      align-self: flex-start;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::after {
+        transition: all 0.3s;
+        content: '';
+        width: 16px;
+        height: 16px;
+        position: relative;
+
+
+        background-image: url("/src/assets/arrows/arrow_short.svg");
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+        border: none;
+      }
+      &.disabled{
+        background-color: var(--color-system-gray);
+        cursor: not-allowed;
+      }
+      &.sending{
+        &::after {
+          border-radius: 50%;
+          background-image: none;
+          animation: spin 1s linear infinite;
+          border-top: 2px solid var(--color-main-white);
+          border-right: 2px solid var(--color-main-white);
+          border-bottom: 2px solid var(--color-main-white);
+          border-left: 2px solid var(--color-system-white);
+        }
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+    }
+  }
+}
 
 
 .footer{
