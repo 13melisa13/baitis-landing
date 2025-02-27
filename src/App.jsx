@@ -127,25 +127,26 @@ const App = () => {
             <main className={clsx(style.main)}>
                 <section id={"main"}
                          className={clsx(style.sectionMain, style.section)}>
-                    <div className={clsx("content")}>
+                    <div className={clsx(style.content)}>
 
-                        <h1 className={clsx("title")}>
+                        <h1 className={clsx(style.title)}>
 
-                            <span className={clsx("hero")}>Море</span>
+                            <span className={clsx("hero", style.meaning)}>Море</span>
                             <span className={clsx("hero")}>
                                 приключений в каждой игре
                             </span>
                         </h1>
-                        <p className={clsx("description", "subtitle-medium")}>
+                        <p className={clsx(style.description, "subtitle-medium")}>
                             Проекты, которые зовут за горизонт и пробуждают дух исследователя
                         </p>
                     </div>
-                    <button className={clsx("button", "primary", "text-semibold-16")}
+                    <button className={clsx(style.button, "primary",
+                        "text-semibold-16")}
                             onClick={() => {
                                 navigateTo("contact-us");
                             }}
-                            aria-label={"Заказать"}>
-                        Заказать
+                            aria-label={"Заказать проект"}>
+                        Заказать проект
                     </button>
                     <div className={style.whales}/>
 
@@ -176,7 +177,7 @@ const App = () => {
                 <section id={"projects"}
                          className={clsx(style.sectionProjects, style.section)}>
                     <h2 className={clsx("heading-h1")}>Проекты</h2>
-                    <div className={clsx("grid-box")}>
+                    <div className={clsx(style.gridBox)}>
                         {projectNames.map((name, index) => (
                             <div key={index}
                                  className={clsx("project")}>
@@ -201,8 +202,8 @@ const App = () => {
                 <section id={"team"}
                          className={clsx(style.sectionTeam, style.section)}>
                     <h2 className={clsx("heading-h1")}>Команда</h2>
-                    <div className={clsx("slider-wrapper")}>
-                        <div className={clsx("slider")}>
+                    <div className={clsx(style.sliderWrapper)}>
+                        <div className={clsx(style.slider)}>
                             {teamMembers.map((member, index) => (
                                 <div key={index}
                                     className={clsx("member")}>
