@@ -2,7 +2,7 @@ import clsx from "clsx";
 import style from "./app.module.scss";
 import {useEffect, useState} from "react";
 
-
+const api = import.meta.env.VITE_API_URL + '/post';
 const App = () => {
     const [isHidden, setIsHidden] = useState(true);
     const [isDisabled, setIsDisabled] = useState(true);
@@ -88,7 +88,7 @@ const App = () => {
         setStatusSend('sending');
         setMessageFromServer([]);
 
-        fetch("https://httpbin.org/post", {
+        fetch(api, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -134,7 +134,7 @@ const App = () => {
 
         }
         setIsDisabled(!isFormValid());
-    }, [form]);
+    }, [form, statusSend]);
 
 
     return (
@@ -369,47 +369,48 @@ const App = () => {
                     className={clsx(style.sectionContact, style.section)}>
                     <h2 className={clsx("heading-h1")}>Связаться</h2>
                     <div className={clsx(style.content)}>
-                    <div className={clsx("description")}>
-                        <div className={clsx("text", "text-regular-28")}>
+                    <div className={clsx(style.description)}>
+                        <div className={clsx(style.text, "text-regular-28")}>
                             Напишите нам — и вместе мы создадим
                             нечто по-настоящему увлекательное!
                         </div>
-                        <address className={clsx("address-box")}>
-                            <div className={clsx("address-list")}>
-                                <div className={clsx("address-item")}>
+                        <address className={clsx(style.addressBox)}>
+                            <div className={clsx(style.addressList)}>
+
+                                <div className={clsx(style.addressItem)}>
+                                    <img
+                                        className={clsx("icon")}
+                                        src={new URL("/src/assets/icons/mail.svg", import.meta.url)}
+                                        alt={""}/>
+                                    <a
+                                        className={clsx("subtitle-medium", style.text)}
+                                        href={"mailto:baitis@mail.ru"}>baitis@mail.ru</a>
+                                </div>
+                                <div className={clsx(style.addressItem)}>
                                     <img
                                         className={clsx("icon")}
 
                                         src={new URL("/src/assets/icons/phone.svg", import.meta.url)}
-                                        alt={""} />
-                                    <a className={clsx("subtitle-medium", "text")}
-                                        href={"tel:+74951234567"}>+7 (495) 123-45-67</a>
+                                        alt={""}/>
+                                    <a className={clsx("subtitle-medium", style.text)}
+                                       href={"tel:+74951234567"}>+7 (495) 123-45-67</a>
                                 </div>
-                                <div className={clsx("address-item")}>
-                                    <img
-                                        className={clsx("icon")}
-
-                                        src={new URL("/src/assets/icons/mail.svg", import.meta.url)}
-                                        alt={""} />
-                                    <a
-                                        className={clsx("subtitle-medium", "text")}
-                                        href={"mailto:mail@mail.ru"}>mail@mail.ru</a>
-                                </div>
-                                <div className={clsx("address-item")}>
+                                <div className={clsx(style.addressItem)}>
                                     <img
                                         className={clsx("icon")}
                                         src={new URL("/src/assets/icons/location.svg", import.meta.url)}
-                                        alt={""} />
+                                        alt={""}/>
                                     <span
-                                        className={clsx("text", "subtitle-medium")}
-                                    >Москва, ул. Пушкина, д. Колотушкина</span>
+                                        className={clsx(style.text,
+                                            "subtitle-medium")}
+                                    >Москва, ул. Пушкина, д. 4</span>
                                 </div>
                             </div>
-                            <div className={clsx("social")}>
+                            <div className={clsx(style.social)}>
                                 <a href={"#"}
-                                    className={clsx("social-link")}>
+                                   className={clsx("social-link")}>
                                     <img src={new URL("/src/assets/social_icons/fb.svg", import.meta.url)}
-                                        alt={"Facebook"}
+                                         alt={"Facebook"}
                                          className={clsx("social-icon")}
                                     />
                                 </a>
@@ -460,10 +461,10 @@ const App = () => {
                                    name={"name"}
                                    value={form.name}
                                    onChange={handleChange}
-                                   onInvalid={(e) => {
+                                   onInvalid={() => {
                                    setMessageFromServer(prev => [...prev, "Имя обязательно для заполнения"]);
                                    }}
-                                      onInput={(e) => {
+                                      onInput={() => {
                                         setMessageFromServer(prev => prev.filter((message) => message !== "Имя обязательно для заполнения"));
                                       }}
                                    required />
@@ -479,10 +480,10 @@ const App = () => {
                                    className={clsx("input", "text-regular-14",
                                        messageFromServer.find((message) => message === "Некорректный email") && style.error)}
                                    name={"email"}
-                                   onInvalid={(e) => {
+                                   onInvalid={() => {
                                         setMessageFromServer(prevState => [...prevState, "Некорректный email"]);
                                    }}
-                                   onInput={(e) => {
+                                   onInput={() => {
                                        setMessageFromServer(prevState => prevState.filter((message) => message !== "Некорректный email"));
                                    }}
                                    value={form.email}
@@ -501,10 +502,10 @@ const App = () => {
                                 className={clsx("textarea", "text-regular-14",
                                     messageFromServer.find((message) => message === "Сообщение обязательно для заполнения") && style.error)}
                                 name={"message"}
-                                onInvalid={(e) => {
+                                onInvalid={() => {
                                     setMessageFromServer(prevState => [...prevState, "Сообщение обязательно для заполнения"]);
                                 }}
-                                onInput={(e) => {
+                                onInput={() => {
                                     setMessageFromServer(prevState => prevState.filter((message) => message !== "Сообщение обязательно для заполнения"));
                                 }}
                                       value={form.message}
@@ -516,10 +517,10 @@ const App = () => {
                             <input type={"checkbox"} required
                                    disabled={statusSend === 'sending'}
 
-                                   onInvalid={(e) => {
+                                   onInvalid={() => {
                                        setMessageFromServer(prevState => [...prevState, "Вы должны принять соглашение"]);
                                    }}
-                                      onInput={(e) => {
+                                      onInput={() => {
                                           setMessageFromServer(prevState => prevState.filter((message) => message !== "Вы должны принять соглашение"));
                                       }
                                       }
