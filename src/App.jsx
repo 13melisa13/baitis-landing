@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import style from "./app.module.scss";
 import {useEffect, useState} from "react";
-import PersonCard from "./PersonCard.jsx";
+import PersonCard from "./cards/PersonCard.jsx";
+import ProjectCard from "./cards/ProjectCard.jsx";
 
 const api = import.meta.env.VITE_API_URL + '/post';
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
                 } else {
                     setIsScrollableLeft(true);
                 }
-                if (slider.scrollLeft + slider.clientWidth === slider.scrollWidth) {
+                if (slider.scrollLeft + slider.clientWidth > slider.scrollWidth) {
                     console.log("right end");
                     setIsScrollableRight(false);
                 } else {
@@ -92,8 +93,8 @@ const App = () => {
     const navigateTo = (id) => {
         const element = document.getElementById(id);
         if (!element) return;
-
-        const offset = element.getBoundingClientRect().top + window.scrollY;
+        console.log(element.getBoundingClientRect().top + window.scrollY);
+        const offset = element.getBoundingClientRect().top + window.scrollY - 200;
         window.scrollTo({ top: offset, behavior: "smooth" });
     }
     const [form, setForm] = useState({
@@ -251,57 +252,69 @@ const App = () => {
                          className={clsx(style.sectionProjects, style.section)}>
                     <h2 className={clsx("heading-h1")}>Проекты</h2>
                     <div className={clsx(style.gridBox)}>
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"1.png"}
+                                alternativeName={"Проект 1"}
+                            />
+                            <ProjectCard
+                                id={"project2"}
+                                urlToProject={"#main"}
+                                nameFile={"2.png"}
+                                alternativeName={"Проект 2"}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"3.png"}
+                                alternativeName={"Проект 3"}
+                            />
 
-                            <div className={clsx(style.project)}>
-                                <img src={new URL(`/src/assets/projects/1.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-                            <div className={clsx(style.project)} id={"project2"}>
-                                <img src={new URL(`/src/assets/projects/2.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-
-                            <div className={clsx(style.project)} id={"project3"}>
-                                <img src={new URL(`/src/assets/projects/3.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
                         {(!isHidden || document.documentElement.clientWidth > 685)
                             &&
                             <>
-                            <div className={clsx(style.project)}>
-                                <img src={new URL(`/src/assets/projects/4.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"4.png"}
+                                alternativeName={"Проект 4"}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"5.png"}
+                                alternativeName={"Проект 5"}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"6.png"}
+                                alternativeName={"Проект 6"}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"7.png"}
+                                alternativeName={"Проект 7"}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"8.png"}
+                                alternativeName={"Проект 8"}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"9.png"}
+                                alternativeName={"Проект 9"}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"10.png"}
+                                alternativeName={"Проект 10"}
+                                noStretch={true}
+                            />
+                            <ProjectCard
+                                urlToProject={"#main"}
+                                nameFile={"11.png"}
+                                alternativeName={"Проект 11"}
+                                noStretch={true}
+                            />
 
-                            <div className={clsx(style.project)}>
-                                <img src={new URL(`/src/assets/projects/5.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-                            <div className={clsx(style.project)}>
-                                <img src={new URL(`/src/assets/projects/6.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-
-                            <div className={clsx(style.project)}>
-                                <img src={new URL(`/src/assets/projects/7.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-                            <div className={clsx(style.project)}>
-                                <img src={new URL(`/src/assets/projects/8.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-                            <div className={clsx(style.project)}>
-                                <img src={new URL(`/src/assets/projects/9.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-                            <div className={clsx(style.project, style.projectLast)}>
-                                <img src={new URL(`/src/assets/projects/10.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
-                            <div className={clsx(style.project, style.projectLast)}>
-                                <img src={new URL(`/src/assets/projects/11.png`, import.meta.url)}
-                                     alt={''}/>
-                            </div>
                             </>
                     }
 

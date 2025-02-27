@@ -3,6 +3,10 @@
   @media (min-width: 1441px){
     --padding-aside: calc((100vw - 1440px + 240px) / 2);
   }
+
+}
+html {
+  scroll-behavior: smooth;
 }
 .layout{
   background-color: var(--color-main-white);
@@ -421,35 +425,6 @@
     column-gap: 8px;
     align-items: center;
     //justify-content: center;
-
-
-    .project{
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      //
-    }
-    .project.projectLast{
-      flex-grow: 0;
-      @media (max-width: 768px){
-        flex-grow: 1;
-        margin: 0 auto;
-        max-width: 350px;
-      }
-    }
-
-
-
-
-    .project img{
-
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      object-position: center;
-    }
-
 
   }
   .button{
