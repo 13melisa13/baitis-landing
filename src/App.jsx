@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import style from "./app.module.scss";
 import {useEffect, useState} from "react";
+import PersonCard from "./PersonCard.jsx";
 
 const api = import.meta.env.VITE_API_URL + '/post';
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
             name: "Анна",
             surname: "Иванова",
             position: "Дизайнер",
-            photo: "anna.png",
+            photo: "anna.jpg",
             achievement: "Победитель конкурса дизайнеров 2023 года"
         },
         {
@@ -196,9 +197,6 @@ const App = () => {
                             aria-label={"Заказать проект"}>
                         Заказать проект
                     </button>
-                    {/*<div className={style.whales}/>*/}
-
-
                 </section>
                 <section id={"about-us"}
                          className={clsx(style.sectionAbout, style.section)}>
@@ -301,70 +299,40 @@ const App = () => {
                     }
 
                 </section>
-                {/*<section id={"team"}*/}
-                {/*         className={clsx(style.sectionTeam, style.section)}>*/}
-                {/*    <h2 className={clsx("heading-h1")}>Команда</h2>*/}
-                {/*    <div className={clsx(style.sliderWrapper)}>*/}
-                {/*        <div className={clsx(style.slider)}>*/}
-                {/*            {teamMembers.map((member, index) => (*/}
-                {/*                <div key={index}*/}
-                {/*                     className={clsx("member")}>*/}
-                {/*                    <img src={new URL(`/src/assets/team/${member.photo}`, import.meta.url)}*/}
-                {/*                        alt={""}*/}
-                {/*                         onError={(e) => {*/}
-                {/*                            e.target.src = new URL("/src/assets/team/default.png", import.meta.url);*/}
-                {/*                         }}*/}
-                {/*                    />*/}
-                {/*                    <div className={clsx("info")}>*/}
-                {/*                        <h3 className={clsx("name")}>*/}
-                {/*                            <span className={clsx("subtitle-medium")}>*/}
-                {/*                                {member.name}*/}
-                {/*                            </span>*/}
-                {/*                            <span className={clsx("subtitle-medium")}>*/}
-                {/*                                {member.surname}*/}
-                {/*                            </span>*/}
-                {/*                        </h3>*/}
-                {/*                        <p className={clsx("position", "text-regular-16")}>*/}
-                {/*                            {member.position}*/}
-                {/*                        </p>*/}
-                {/*                        <p className={clsx("achievement", "text-regular-14")}>*/}
-                {/*                            {member.achievement}*/}
-                {/*                        </p>*/}
-                {/*                    </div>*/}
-                {/*                </div>*/}
-                {/*            ))}*/}
-                {/*        </div>*/}
-                {/*        <div className={clsx("manage")}>*/}
-                {/*            <button className={clsx("button", "secondary")}*/}
-                {/*                    onClick={() => {*/}
-                {/*                        const slider = document.querySelector(".slider");*/}
-                {/*                        if (slider) {*/}
-                {/*                            slider.scrollLeft -= 200;*/}
-                {/*                        }*/}
-                {/*                    }}*/}
-                {/*                    >*/}
-                {/*                <img src={new URL("/src/assets/arrows/arrow_long.svg", import.meta.url)}*/}
-                {/*                    className={clsx("arrow")}*/}
-                {/*                     alt="&#8592;"*/}
+                <section id={"team"}
+                         className={clsx(style.sectionTeam, style.section)}>
+                    <h2 className={clsx("heading-h1")}>Команда</h2>
+                    <div className={clsx(style.sliderWrapper)}>
+                        <div className={clsx(style.slider, "slider")}>
+                            {teamMembers.map((member, index) => (
+                                <PersonCard key={index}
+                                    {...member}
+                                />
+                            ))}
+                        </div>
+                        <div className={clsx(style.buttons)}>
+                            <button className={clsx(style.button)}
+                                    onClick={() => {
+                                        const slider = document.querySelector(".slider");
+                                        if (slider) {
+                                            slider.scrollLeft -= 314;
 
-                {/*                />*/}
-                {/*            </button>*/}
-                {/*            <button className={clsx("button", "secondary")}*/}
-                {/*                    onClick={() => {*/}
-                {/*                        const slider = document.querySelector(".slider");*/}
-                {/*                        if (slider) {*/}
-                {/*                            slider.scrollLeft += 200;*/}
-                {/*                        }*/}
-                {/*                    }}>*/}
-                {/*                <img src={new URL("/src/assets/arrows/arrow_long.svg", import.meta.url)}*/}
-                {/*                        className={clsx("arrow", "right")}*/}
-                {/*                        alt="&#8594;" />*/}
+                                        }
+                                    }}/>
 
-                {/*            </button>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
+                            <button className={clsx(style.button, style.right)}
+                                    onClick={() => {
+                                        const slider = document.querySelector(".slider");
+                                        if (slider) {
+                                            slider.scrollLeft += 314;
+                                        }
+                                    }} />
 
-                {/*</section>*/}
+
+                        </div>
+                    </div>
+
+                </section>
                 <section id={"contact-us"}
                     className={clsx(style.sectionContact, style.section)}>
                     <h2 className={clsx("heading-h1")}>Связаться</h2>

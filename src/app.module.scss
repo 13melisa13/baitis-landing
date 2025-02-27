@@ -489,23 +489,48 @@
 
 }
 .sectionTeam{
-  .sliderWrapper{
-    @media (max-width: 768px){
-      display: none;
-      //display: flex;
-      overflow-x: auto;
-      gap: 24px;
-      padding: 0 var(--padding-aside);
+  padding-right: 0;
 
-    }
+  .sliderWrapper{
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
     position: relative;
     width: 100%;
     overflow: hidden;
+
     .slider{
+      padding-right: var(--padding-aside);
+      overflow: scroll;
       display: flex;
-      gap: 24px;
+      gap: 32px;
       transition: transform 0.5s;
     }
+
+  }
+  .buttons{
+    align-self: flex-end;
+    margin-right: var(--padding-aside);
+    display: flex;
+    gap: 32px;
+  }
+  .button{
+    width: 48px;
+    height: 48px;
+    padding: 16px;
+    background-color: var(--color-main-white);
+    border: 2px solid var(--color-main-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url("/src/assets/arrows/arrow_long.svg");
+    background-size: 16px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .right{
+    transform: rotate(180deg);
   }
 }
 

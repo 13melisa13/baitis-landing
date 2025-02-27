@@ -1,0 +1,41 @@
+.card{
+  //background-color: #FF5A5F;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 282px;
+  border-radius: 16px;
+  padding: 24px;
+  gap: 24px;
+  box-shadow: 0 4px 15px 0 rgba(146, 159, 185, 0.2);
+
+
+  .photo{
+    box-sizing: border-box;
+    width: 234px;
+    height: 256px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: center;
+
+  }
+  .description{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .nameBox{
+      display: flex;
+      gap: 6px;
+      flex-direction: column;
+
+    }
+    .position, .nameBox span{
+      color: var(--color-main-black);
+    }
+    .achievement{
+      color: var(--color-system-black);
+    }
+  }
+}
